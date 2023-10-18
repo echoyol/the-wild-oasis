@@ -63,11 +63,11 @@ function CreateCabinForm() {
   })
 
   function onSubmit(data) {
-    mutate({ ...data, image: data.image[0] })
+    mutate(data)
   }
 
   function onError(err) {
-    // console.log(err)
+    console.log(err)
   }
   return (
     <Form onSubmit={handleSubmit(onSubmit, onError)}>
@@ -78,7 +78,6 @@ function CreateCabinForm() {
         <Input
           type='text'
           id='name'
-          disabled={isCreating}
           {...register('name', {
             required: 'This field is required ',
           })}
@@ -92,7 +91,6 @@ function CreateCabinForm() {
         <Input
           type='number'
           id='maxCapacity'
-          disabled={isCreating}
           {...register('maxCapacity', {
             required: 'This field is required ',
             min: {
@@ -110,7 +108,6 @@ function CreateCabinForm() {
         <Input
           type='number'
           id='regularPrice'
-          disabled={isCreating}
           {...register('regularPrice', {
             required: 'This field is required ',
             min: {
@@ -125,42 +122,37 @@ function CreateCabinForm() {
         label='Discount'
         error={errors?.discount?.message}
       >
+        <Label htmlFor='discount'>Discount</Label>
         <Input
           type='number'
           id='discount'
           defaultValue={0}
-          disabled={isCreating}
           {...register('discount', {
             required: 'This field is required ',
             validate: (value) =>
-              Number(getValues().regularPrice) > Number(value) ||
+              value <= getValues().regularPrice ||
               'Discount should be less than regular price',
           })}
         />
       </FormRow>
 
-      <FormRow
-        label='Description for website'
-        error={errors?.discription?.message}
-      >
+      <FormRow2>
+        <Label htmlFor='description'>Description for website</Label>
         <Textarea
           type='number'
           id='description'
           defaultValue=''
-          disabled={isCreating}
           {...register('discription', { required: 'This field is required ' })}
         />
-      </FormRow>
+      </FormRow2>
 
-      <FormRow label='Cabin photo'>
+      <FormRow2>
+        <Label htmlFor='image'>Cabin photo</Label>
         <FileInput
           id='image'
           accept='image/*'
-          {...register('image', {
-            required: 'This field is required ',
-          })}
         />
-      </FormRow>
+      </FormRow2>
 
       <FormRow2>
         {/* type is an HTML attribute! */}

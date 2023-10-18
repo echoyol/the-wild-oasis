@@ -1,3 +1,5 @@
+import styled from 'styled-components'
+
 import Input from '../../ui/Input'
 import Form from '../../ui/Form'
 import Button from '../../ui/Button'
@@ -7,10 +9,8 @@ import { useForm } from 'react-hook-form'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { createCabin } from '../../services/apiCabins'
 import toast from 'react-hot-toast'
-import styled from 'styled-components'
-import FormRow from '../../ui/FormRow'
 
-const FormRow2 = styled.div`
+const FormRow = styled.div`
   display: grid;
   align-items: center;
   grid-template-columns: 24rem 1fr 1.2fr;
@@ -47,8 +47,7 @@ const Error = styled.span`
 `
 
 function CreateCabinForm() {
-  const { register, handleSubmit, reset, getValues, formState } = useForm()
-  const { errors } = formState
+  const { register, handleSubmit, reset } = useForm()
 
   const queryClient = useQueryClient()
 
@@ -63,36 +62,30 @@ function CreateCabinForm() {
   })
 
   function onSubmit(data) {
-    mutate({ ...data, image: data.image[0] })
+    mutate(data)
   }
 
   function onError(err) {
-    // console.log(err)
+    console.log(err)
   }
   return (
     <Form onSubmit={handleSubmit(onSubmit, onError)}>
-      <FormRow
-        label='Cabin name'
-        error={errors?.name?.message}
-      >
+      <FormRow>
+        <Label htmlFor='name'>Cabin name</Label>
         <Input
           type='text'
           id='name'
-          disabled={isCreating}
           {...register('name', {
             required: 'This field is required ',
           })}
         />
       </FormRow>
 
-      <FormRow
-        label='Maximum capacity'
-        error={errors?.maxCapacity?.message}
-      >
+      <FormRow>
+        <Label htmlFor='maxCapacity'>Maximum capacity</Label>
         <Input
           type='number'
           id='maxCapacity'
-          disabled={isCreating}
           {...register('maxCapacity', {
             required: 'This field is required ',
             min: {
@@ -103,66 +96,44 @@ function CreateCabinForm() {
         />
       </FormRow>
 
-      <FormRow
-        label='Regular price'
-        error={errors?.regularPrice?.message}
-      >
+      <FormRow>
+        <Label htmlFor='regularPrice'>Regular price</Label>
         <Input
           type='number'
           id='regularPrice'
-          disabled={isCreating}
-          {...register('regularPrice', {
-            required: 'This field is required ',
-            min: {
-              value: 1,
-              message: 'Capacity should be at least 1',
-            },
-          })}
+          {...register('regularPrice', { required: 'This field is required ' })}
         />
       </FormRow>
 
-      <FormRow
-        label='Discount'
-        error={errors?.discount?.message}
-      >
+      <FormRow>
+        <Label htmlFor='discount'>Discount</Label>
         <Input
           type='number'
           id='discount'
           defaultValue={0}
-          disabled={isCreating}
-          {...register('discount', {
-            required: 'This field is required ',
-            validate: (value) =>
-              Number(getValues().regularPrice) > Number(value) ||
-              'Discount should be less than regular price',
-          })}
+          {...register('discount', { required: 'This field is required ' })}
         />
       </FormRow>
 
-      <FormRow
-        label='Description for website'
-        error={errors?.discription?.message}
-      >
+      <FormRow>
+        <Label htmlFor='description'>Description for website</Label>
         <Textarea
           type='number'
           id='description'
           defaultValue=''
-          disabled={isCreating}
           {...register('discription', { required: 'This field is required ' })}
         />
       </FormRow>
 
-      <FormRow label='Cabin photo'>
+      <FormRow>
+        <Label htmlFor='image'>Cabin photo</Label>
         <FileInput
           id='image'
           accept='image/*'
-          {...register('image', {
-            required: 'This field is required ',
-          })}
         />
       </FormRow>
 
-      <FormRow2>
+      <FormRow>
         {/* type is an HTML attribute! */}
         <Button
           variation='secondary'
@@ -171,7 +142,7 @@ function CreateCabinForm() {
           Cancel
         </Button>
         <Button disabled={isCreating}>Add cabin</Button>
-      </FormRow2>
+      </FormRow>
     </Form>
   )
 }

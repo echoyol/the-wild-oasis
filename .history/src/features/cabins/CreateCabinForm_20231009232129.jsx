@@ -63,7 +63,7 @@ function CreateCabinForm() {
   })
 
   function onSubmit(data) {
-    mutate({ ...data, image: data.image[0] })
+    mutate(data)
   }
 
   function onError(err) {
@@ -78,7 +78,6 @@ function CreateCabinForm() {
         <Input
           type='text'
           id='name'
-          disabled={isCreating}
           {...register('name', {
             required: 'This field is required ',
           })}
@@ -92,7 +91,6 @@ function CreateCabinForm() {
         <Input
           type='number'
           id='maxCapacity'
-          disabled={isCreating}
           {...register('maxCapacity', {
             required: 'This field is required ',
             min: {
@@ -110,7 +108,6 @@ function CreateCabinForm() {
         <Input
           type='number'
           id='regularPrice'
-          disabled={isCreating}
           {...register('regularPrice', {
             required: 'This field is required ',
             min: {
@@ -129,12 +126,9 @@ function CreateCabinForm() {
           type='number'
           id='discount'
           defaultValue={0}
-          disabled={isCreating}
           {...register('discount', {
             required: 'This field is required ',
-            validate: (value) =>
-              Number(getValues().regularPrice) > Number(value) ||
-              'Discount should be less than regular price',
+            validate: (value) => value <= getValues().regularPrice || value, //'Discount should be less than regular price'
           })}
         />
       </FormRow>
@@ -147,7 +141,6 @@ function CreateCabinForm() {
           type='number'
           id='description'
           defaultValue=''
-          disabled={isCreating}
           {...register('discription', { required: 'This field is required ' })}
         />
       </FormRow>
@@ -156,9 +149,6 @@ function CreateCabinForm() {
         <FileInput
           id='image'
           accept='image/*'
-          {...register('image', {
-            required: 'This field is required ',
-          })}
         />
       </FormRow>
 

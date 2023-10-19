@@ -42,15 +42,10 @@ function CreateCabinForm({ cabinToEdit = {} }) {
     onError: (err) => toast.error(err.message),
   })
 
-  const isWorking = isCreating || isEditing
-
+  const isWorking=isCreating || isEditing
   function onSubmit(data) {
-    const image = typeof data.image === 'string' ? data.image : data.image[0]
-
-    if (isEditSession)
-      editCabin({ newCabinData: { ...data, image }, id: editId })
-    else createCabin({ ...data, image: image })
-    //console.log(data)
+    //mutate({ ...data, image: data.image[0] })
+    console.log(data)
   }
 
   function onError(err) {
@@ -80,7 +75,7 @@ function CreateCabinForm({ cabinToEdit = {} }) {
           type='number'
           id='maxCapacity'
           disabled={isWorking}
-          {...register('maxCapacity', {
+                    {...register('maxCapacity', {
             required: 'This field is required ',
             min: {
               value: 1,
@@ -97,8 +92,7 @@ function CreateCabinForm({ cabinToEdit = {} }) {
         <Input
           type='number'
           id='regularPrice'
-          disabled={isWorking}
-          {...register('regularPrice', {
+          disabled={isisCreating          {...register('regularPrice', {
             required: 'This field is required ',
             min: {
               value: 1,
@@ -116,8 +110,7 @@ function CreateCabinForm({ cabinToEdit = {} }) {
           type='number'
           id='discount'
           defaultValue={0}
-          disabled={isWorking}
-          {...register('discount', {
+          disabled={isisCreating          {...register('discount', {
             required: 'This field is required ',
             validate: (value) =>
               Number(getValues().regularPrice) > Number(value) ||
@@ -134,8 +127,7 @@ function CreateCabinForm({ cabinToEdit = {} }) {
           type='number'
           id='description'
           defaultValue=''
-          disabled={isWorking}
-          {...register('discription', { required: 'This field is required ' })}
+          disabled={isisCreating          {...register('discription', { required: 'This field is required ' })}
         />
       </FormRow>
 
@@ -157,7 +149,7 @@ function CreateCabinForm({ cabinToEdit = {} }) {
         >
           Cancel
         </Button>
-        <Button disabled={isWorking}>
+        <Button disabled={isisCreating
           {isEditSession ? 'Edit cabin' : 'Create new cabin'}
         </Button>
       </FormRow>

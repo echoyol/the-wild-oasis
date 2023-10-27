@@ -33,7 +33,6 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
           onSuccess: (data) => {
             console.log(data)
             reset()
-            onCloseModal?.()
           },
         }
       )
@@ -44,7 +43,6 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
           onSuccess: (data) => {
             console.log(data) // This data is not the data the form submitted,in fact it is the final data where image is a URL
             reset()
-            onCloseModal?.()
           },
         }
       )
@@ -55,10 +53,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
     // console.log(err)
   }
   return (
-    <Form
-      onSubmit={handleSubmit(onSubmit, onError)}
-      type={onCloseModal ? 'modal' : 'regular'}
-    >
+    <Form onSubmit={handleSubmit(onSubmit, onError)}>
       <FormRow
         label='Cabin name'
         error={errors?.name?.message}

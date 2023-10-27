@@ -9,7 +9,6 @@ import {
   useRef,
   useState,
 } from 'react'
-import useOutsideClick from '../hooks/useOutsideClick'
 const StyledModal = styled.div`
   position: fixed;
   top: 50%;
@@ -82,8 +81,21 @@ function Open({ children, opens: opensWindowName }) {
 function Window({ children, name }) {
   const { openName, close } = useContext(ModalContext)
 
-  const ref = useOutsideClick(close)
+  const ref = useRef()
 
+  useEffect(
+    function () {
+      function handleClick(e) {
+        if (ref.current && !ref.current.contains(e.target)) {
+          close()
+        }
+      }
+      document.addEventListener('click', handleClick, true)
+
+      return () => document.removeEventListener('click', handleClick, true)
+    },
+    [close]
+  )
   if (name !== openName) return null
 
   return createPortal(

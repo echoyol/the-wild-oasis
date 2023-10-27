@@ -1,0 +1,23 @@
+import { useState } from 'react'
+import Button from '../../ui/Button'
+import CreateCabinForm from './CreateCabinForm'
+import Modal from '../../ui/Modal'
+
+function AddCabin() {
+  const [IsOpenModal, setIsOpenModal] = useState(false)
+
+  return (
+    <div>
+      <Button onClick={() => setIsOpenModal((show) => !show)}>
+        Add new cabin
+      </Button>
+      {IsOpenModal && (
+        <Modal>
+          <CreateCabinForm />
+        </Modal>
+      )}
+    </div>
+  )
+}
+
+export default AddCabin

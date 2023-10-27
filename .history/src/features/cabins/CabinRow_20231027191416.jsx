@@ -104,7 +104,10 @@ function CabinRow({ cabin }) {
             </Modal.window>
 
             <Modal.open>
-              <button disabled={isDeleting}>
+              <button
+                onClick={}
+                disabled={isDeleting}
+              >
                 <HiTrash />
               </button>
             </Modal.open>

@@ -93,10 +93,7 @@ function Row({ children }) {
     </StyledHeader>
   )
 }
-function Body({ data, render }) {
-  if (!data.length) return <Empty>No data to show at the moment</Empty>
-  return <StyledBody>{data.map(render)}</StyledBody>
-}
+function Body({ children }) {}
 
 Table.Header = Header
 Table.Body = Body

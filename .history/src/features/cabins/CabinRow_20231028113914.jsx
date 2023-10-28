@@ -88,19 +88,25 @@ function CabinRow({ cabin }) {
                   Duplication
                 </Menus.Button>
 
-                <Modal.open opens='edit'>
-                  <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
-                </Modal.open>
+                <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
 
-                <Modal.open opens='delete'>
-                  <Menus.Button icon={<HiTrash />}>Delete</Menus.Button>
-                </Modal.open>
+                <Menus.Button icon={<HiTrash />}>Delete</Menus.Button>
               </Menus.List>
 
+              <Modal.open opens='edit'>
+                <button>
+                  <HiPencil />
+                </button>
+              </Modal.open>
               <Modal.window name='edit'>
                 <CreateCabinForm cabinToEdit={cabin} />
               </Modal.window>
 
+              <Modal.open opens='delete'>
+                <button disabled={isDeleting}>
+                  <HiTrash />
+                </button>
+              </Modal.open>
               <Modal.window name='delete'>
                 <ConfirmDelete
                   resourceName='cabins'

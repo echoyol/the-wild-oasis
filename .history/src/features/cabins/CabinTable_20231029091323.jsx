@@ -11,14 +11,7 @@ function CabinTable() {
 
   if (isLoading) return <Spinner />
 
-  const filterValue = searchParams.get('discount') || 'all'
-
-  let filteredCabins
-  if (filterValue === 'all') filteredCabins = cabins
-  if (filterValue === 'no-discount')
-    filteredCabins = cabins.filter((cabin) => cabin.discount === 0)
-  if (filterValue === 'with-discount')
-    filteredCabins = cabins.filter((cabin) => cabin.discount > 0)
+  const filterValue = searchParams.get('discount')
 
   return (
     <Menus>
@@ -33,7 +26,7 @@ function CabinTable() {
         </Table.Header>
 
         <Table.Body
-          data={filteredCabins}
+          data={cabins}
           render={(cabin) => (
             <CabinRow
               cabin={cabin}

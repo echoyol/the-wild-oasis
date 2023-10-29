@@ -33,7 +33,7 @@ function CabinTable() {
         </Table.Header>
 
         <Table.Body
-          data={filteredCabins}
+          data={cabins}
           render={(cabin) => (
             <CabinRow
               cabin={cabin}

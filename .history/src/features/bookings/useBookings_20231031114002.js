@@ -7,17 +7,17 @@ export function useBookings() {
 
   //FILTER
   const filterValue = searchParams.get('status')
-  const filter =
-    !filterValue || filterValue === 'all'
-      ? null
-      : { field: 'status', value: filterValue }
-
+  // const filter =
+  //   !filterValue || filterValue === 'all'
+  //     ? null
+  //     : { field: 'status', value: filterValue }
+  const filter = { field: 'status', value: 'check-in' }
   const {
     isLoading,
     data: bookings,
     error,
   } = useQuery({
-    queryKey: ['bookings', filter],
+    queryKey: ['bookings'],
     queryFn: () => getBookings({ filter }),
   })
 

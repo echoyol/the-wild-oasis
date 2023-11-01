@@ -7,13 +7,7 @@ export async function getBookings({ filter, sortBy }) {
     .select(
       'id,created_at,startDate,endDate,numNights,numGuests,status,totalPrice,cabins(name),guests(fullName,email)'
     )
-
-  //FILTER
-  if (filter !== null)
-    query = query[filter.method || 'eq'](filter.field, filter.value)
-
   const { data, error } = await query
-
   if (error) {
     console.error(error)
     throw new Error('Bookings could not be loaded')

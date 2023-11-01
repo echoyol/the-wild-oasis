@@ -10,14 +10,14 @@ export function useBookings() {
   const filter =
     !filterValue || filterValue === 'all'
       ? null
-      : { field: 'status', value: filterValue }
+      : { filed: 'status', value: filterValue }
 
   const {
     isLoading,
     data: bookings,
     error,
   } = useQuery({
-    queryKey: ['bookings', filter],
+    queryKey: ['bookings'],
     queryFn: () => getBookings({ filter }),
   })
 

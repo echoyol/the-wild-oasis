@@ -17,8 +17,8 @@ export function useBookings() {
     data: bookings,
     error,
   } = useQuery({
-    queryKey: ['bookings', filter],
-    queryFn: () => getBookings({ filter }),
+    queryKey: ['bookings'],
+    queryFn: () => getBookings({ {field:"status",value:"check-in"} }),
   })
 
   return { isLoading, error, bookings }

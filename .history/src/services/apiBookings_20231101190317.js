@@ -11,11 +11,11 @@ export async function getBookings({ filter, sortBy }) {
   //FILTER
   if (filter) query = query[filter.method || 'eq'](filter.field, filter.value)
 
+  const { data, error } = await query
+
   //SORT
   if (sortBy)
     query = query.order(sortBy.field, { ascending: sortBy.direction === 'asc' })
-
-  const { data, error } = await query
 
   if (error) {
     console.error(error)

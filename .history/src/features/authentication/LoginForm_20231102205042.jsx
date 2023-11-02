@@ -6,8 +6,8 @@ import FormRowVertical from '../../ui/FormRowVertical'
 import { login } from '../../services/apiAuth'
 
 function LoginForm() {
-  const [email, setEmail] = useState('poirot@hercule.com')
-  const [password, setPassword] = useState('pass123')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
   function handleSubmit(e) {
     e.preventDefault()

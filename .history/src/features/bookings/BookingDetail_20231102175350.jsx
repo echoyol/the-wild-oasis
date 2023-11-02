@@ -94,11 +94,7 @@ function BookingDetail() {
         <Modal.window name='delete'>
           <ConfirmDelete
             resourceName='booking'
-            onConfirm={() =>
-              deleteBooking(bookingId, {
-                onSettled: () => navigate(-1),
-              })
-            }
+            onConfirm={() => deleteBooking(bookingId)}
             disabled={isDeleting}
           />
         </Modal.window>

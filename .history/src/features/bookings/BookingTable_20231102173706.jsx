@@ -39,7 +39,7 @@ function BookingTable() {
           </Table.Footer>
         </Table>
       </Menus>
-    </>
+    
   )
 }
 

@@ -5,6 +5,7 @@ import Empty from '../../ui/Empty'
 import Spinner from '../../ui/Spinner'
 import { useBookings } from './useBookings'
 import Pagination from '../../ui/Pagination'
+import Modal from '../../ui/Modal'
 
 function BookingTable() {
   const { bookings, isLoading, count } = useBookings()
@@ -12,7 +13,7 @@ function BookingTable() {
   if (!bookings.length) return <Empty resourceName='bookings' />
 
   return (
-    <>
+    <Modal>
       <Menus>
         <Table columns='0.6fr 2fr 2.4fr 1.4fr 1fr 3.2rem'>
           <Table.Header>
@@ -39,7 +40,7 @@ function BookingTable() {
           </Table.Footer>
         </Table>
       </Menus>
-    </>
+    </Modal>
   )
 }
 

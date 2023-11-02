@@ -96,49 +96,48 @@ function BookingRow({
 
       <Amount>{formatCurrency(totalPrice)}</Amount>
 
-      <Modal>
-        <Menus.Menu>
-          <Menus.Toggle id={bookingId} />
-          <Menus.List id={bookingId}>
+      <Menus.Menu>
+        <Menus.Toggle id={bookingId} />
+        <Menus.List id={bookingId}>
+          <Menus.Button
+            icon={<HiEye />}
+            onClick={() => navigate(`/bookings/${bookingId}`)}
+          >
+            See details
+          </Menus.Button>
+
+          {status === 'unconfirmed' && (
             <Menus.Button
-              icon={<HiEye />}
-              onClick={() => navigate(`/bookings/${bookingId}`)}
+              icon={<HiArrowDownOnSquare />}
+              onClick={() => navigate(`/checkin/${bookingId}`)}
             >
-              See details
+              Check in
             </Menus.Button>
+          )}
 
-            {status === 'unconfirmed' && (
-              <Menus.Button
-                icon={<HiArrowDownOnSquare />}
-                onClick={() => navigate(`/checkin/${bookingId}`)}
-              >
-                Check in
-              </Menus.Button>
-            )}
+          {status === 'checked-in' && (
+            <Menus.Button
+              icon={<HiArrowUpOnSquare />}
+              onClick={() => checkout(bookingId)}
+              disabled={isCheckingOut}
+            >
+              Check out
+            </Menus.Button>
+          )}
 
-            {status === 'checked-in' && (
-              <Menus.Button
-                icon={<HiArrowUpOnSquare />}
-                onClick={() => checkout(bookingId)}
-                disabled={isCheckingOut}
-              >
-                Check out
-              </Menus.Button>
-            )}
+          <Modal.open opens='delete'>
+            <Menus.Button icon={<HiTrash />}>Delete</Menus.Button>
+          </Modal.open>
 
-            <Modal.open opens='delete'>
-              <Menus.Button icon={<HiTrash />}>Delete </Menus.Button>
-            </Modal.open>
-          </Menus.List>
-        </Menus.Menu>
-        <Modal.window name='delete'>
-          <ConfirmDelete
-            resourceName='booking'
-            disabled={isDeleting}
-            onConfirm={() => deleteBooking(bookingId)}
-          />
-        </Modal.window>
-      </Modal>
+          <Modal.window name='delete'>
+            <ConfirmDelete
+              resourceName='booking'
+              disabled={isDeleting}
+              onConfirm={() => deleteBooking(bookingId)}
+            />
+          </Modal.window>
+        </Menus.List>
+      </Menus.Menu>
     </Table.Row>
   )
 }

@@ -81,9 +81,8 @@ function BookingDetail() {
           )}
 
           <Modal.open opens='delete'>
-            <Button variation='danger'> Delete</Button>
+            <Button> Delete</Button>
           </Modal.open>
-
           <Button
             variation='secondary'
             onClick={moveBack}
@@ -91,14 +90,10 @@ function BookingDetail() {
             Back
           </Button>
         </ButtonGroup>
-        <Modal.window name='delete'>
+        <Modal.window>
           <ConfirmDelete
             resourceName='booking'
-            onConfirm={() =>
-              deleteBooking(bookingId, {
-                onSettled: () => navigate(-1),
-              })
-            }
+            onConfirm={() => deleteBooking(bookingId)}
             disabled={isDeleting}
           />
         </Modal.window>

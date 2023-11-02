@@ -30,14 +30,12 @@ function CheckinBooking() {
 
   const { booking, isLoading } = useBooking()
   const { settings, isLoading: isLoadingSettings } = useSetting()
-
   useEffect(() => setConfirmPaid(booking?.isPaid ?? false), [booking])
 
   const moveBack = useMoveBack()
   const { checkin, isCheckingIn } = useCheckin()
 
-  if (isLoading || isLoadingSettings) return <Spinner />
-
+  if (isLoading) return <Spinner />
   const {
     id: bookingId,
     guests,
@@ -47,22 +45,9 @@ function CheckinBooking() {
     numNights,
   } = booking
 
-  const optionalBreakfastPrice = settings.breakfastPrice * numNights * numGuests
   function handleCheckin() {
     if (!confirmPaid) return
-
-    if (addBreakfast) {
-      checkin({
-        bookingId,
-        breakfast: {
-          hasBreakfast: true,
-          extrasPrice: optionalBreakfastPrice,
-          totalPrice: totalPrice + optionalBreakfastPrice,
-        },
-      })
-    } else {
-      checkin({ bookingId, breakfast: {} })
-    }
+    checkin(bookingId)
   }
 
   return (
@@ -74,21 +59,18 @@ function CheckinBooking() {
 
       <BookingDataBox booking={booking} />
 
-      {!hasBreakfast && (
-        <Box>
-          <Checkbox
-            checked={addBreakfast}
-            onChange={() => {
-              setAddBreakfast((add) => !add)
-              setConfirmPaid(false)
-            }}
-            id='breakfast'
-          >
-            Want to add breakfast for {formatCurrency(optionalBreakfastPrice)}?
-          </Checkbox>
-        </Box>
-      )}
-
+      <Box>
+        <Checkbox
+          checked={addBreakfast}
+          onChange={() => {
+            setAddBreakfast((add) => !add)
+            setConfirmPaid(false)
+          }}
+          id='breakfast'
+        >
+          Want to add breakfast for X
+        </Checkbox>
+      </Box>
       <Box>
         <Checkbox
           checked={confirmPaid}
@@ -97,13 +79,7 @@ function CheckinBooking() {
           disabled={confirmPaid || isCheckingIn}
         >
           I confirm that {guests.fullName} has paid the total amount of{' '}
-          {!addBreakfast
-            ? formatCurrency(totalPrice)
-            : `${formatCurrency(
-                totalPrice + optionalBreakfastPrice
-              )} (${formatCurrency(totalPrice)}+${formatCurrency(
-                optionalBreakfastPrice
-              )})`}
+          {formatCurrency(totalPrice)}
         </Checkbox>
       </Box>
       <ButtonGroup>

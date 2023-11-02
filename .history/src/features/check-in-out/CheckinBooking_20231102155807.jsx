@@ -50,19 +50,7 @@ function CheckinBooking() {
   const optionalBreakfastPrice = settings.breakfastPrice * numNights * numGuests
   function handleCheckin() {
     if (!confirmPaid) return
-
-    if (addBreakfast) {
-      checkin({
-        bookingId,
-        breakfast: {
-          hasBreakfast: true,
-          extrasPrice: optionalBreakfastPrice,
-          totalPrice: totalPrice + optionalBreakfastPrice,
-        },
-      })
-    } else {
-      checkin({ bookingId, breakfast: {} })
-    }
+    checkin(bookingId)
   }
 
   return (
@@ -74,8 +62,8 @@ function CheckinBooking() {
 
       <BookingDataBox booking={booking} />
 
-      {!hasBreakfast && (
-        <Box>
+      <Box>
+        {!hasBreakfast && (
           <Checkbox
             checked={addBreakfast}
             onChange={() => {
@@ -86,9 +74,8 @@ function CheckinBooking() {
           >
             Want to add breakfast for {formatCurrency(optionalBreakfastPrice)}?
           </Checkbox>
-        </Box>
-      )}
-
+        )}
+      </Box>
       <Box>
         <Checkbox
           checked={confirmPaid}

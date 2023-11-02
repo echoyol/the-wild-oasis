@@ -61,7 +61,7 @@ function CheckinBooking() {
         },
       })
     } else {
-      checkin({ bookingId, breakfast: {} })
+      checkin(bookingId)
     }
   }
 
@@ -74,8 +74,8 @@ function CheckinBooking() {
 
       <BookingDataBox booking={booking} />
 
-      {!hasBreakfast && (
-        <Box>
+      <Box>
+        {!hasBreakfast && (
           <Checkbox
             checked={addBreakfast}
             onChange={() => {
@@ -86,9 +86,8 @@ function CheckinBooking() {
           >
             Want to add breakfast for {formatCurrency(optionalBreakfastPrice)}?
           </Checkbox>
-        </Box>
-      )}
-
+        )}
+      </Box>
       <Box>
         <Checkbox
           checked={confirmPaid}

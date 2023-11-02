@@ -14,7 +14,7 @@ function useChecking() {
         isPaid: true,
       }),
     onSuccess: (data) => {
-      toast.success(`Booing #${data.id} successfully checked in`)
+      toast.success(`Book ing #${data.id} successfully checked in`)
       queryClient.invalidateQueries({ active: true })
       navigate('/')
     },

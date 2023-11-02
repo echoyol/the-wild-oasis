@@ -88,7 +88,6 @@ function CheckinBooking() {
           </Checkbox>
         </Box>
       )}
-
       <Box>
         <Checkbox
           checked={confirmPaid}

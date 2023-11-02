@@ -23,10 +23,10 @@ function BookingDetail() {
   const moveBack = useMoveBack()
   if (isLoading) return <Spinner />
 
-  // if (!booking) {
-  //   // Handle the case when the booking is undefined or null
-  //   return <Spinner />
-  // }
+  if (!booking) {
+    // Handle the case when the booking is undefined or null
+    return <Spinner />
+  }
 
   const { status, id: bookingId } = booking
 

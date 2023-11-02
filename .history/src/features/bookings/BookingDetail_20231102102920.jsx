@@ -20,15 +20,12 @@ const HeadingGroup = styled.div`
 
 function BookingDetail() {
   const { booking, isLoading } = useBooking()
+
+  const { status } = booking
+
   const moveBack = useMoveBack()
+
   if (isLoading) return <Spinner />
-
-  // if (!booking) {
-  //   // Handle the case when the booking is undefined or null
-  //   return <Spinner />
-  // }
-
-  const { status, id: bookingId } = booking
 
   const statusToTagName = {
     unconfirmed: 'blue',
@@ -40,13 +37,13 @@ function BookingDetail() {
     <>
       <Row type='horizontal'>
         <HeadingGroup>
-          <Heading as='h1'>Booking #{bookingId}</Heading>
+          <Heading as='h1'>Booking #X</Heading>
           <Tag type={statusToTagName[status]}>{status.replace('-', ' ')}</Tag>
         </HeadingGroup>
         <ButtonText onClick={moveBack}>&larr; Back</ButtonText>
       </Row>
 
-      <BookingDataBox booking={booking} />
+      {/* <BookingDataBox booking={booking} /> */}
 
       <ButtonGroup>
         <Button

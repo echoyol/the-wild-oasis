@@ -20,15 +20,17 @@ const HeadingGroup = styled.div`
 
 function BookingDetail() {
   const { booking, isLoading } = useBooking()
-  const moveBack = useMoveBack()
-  if (isLoading) return <Spinner />
 
-  // if (!booking) {
-  //   // Handle the case when the booking is undefined or null
-  //   return <Spinner />
-  // }
+  const moveBack = useMoveBack()
+
+  if (!booking) {
+    // Handle the case when the booking is undefined or null
+    return <div>No booking found.</div>
+  }
 
   const { status, id: bookingId } = booking
+
+  if (isLoading) return <Spinner />
 
   const statusToTagName = {
     unconfirmed: 'blue',
@@ -46,7 +48,7 @@ function BookingDetail() {
         <ButtonText onClick={moveBack}>&larr; Back</ButtonText>
       </Row>
 
-      <BookingDataBox booking={booking} />
+      {/* <BookingDataBox booking={booking} /> */}
 
       <ButtonGroup>
         <Button

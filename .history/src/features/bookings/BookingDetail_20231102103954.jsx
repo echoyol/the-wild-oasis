@@ -21,12 +21,13 @@ const HeadingGroup = styled.div`
 function BookingDetail() {
   const { booking, isLoading } = useBooking()
   const moveBack = useMoveBack()
-  if (isLoading) return <Spinner />
 
   // if (!booking) {
   //   // Handle the case when the booking is undefined or null
   //   return <Spinner />
   // }
+
+  if (isLoading) return <Spinner />
 
   const { status, id: bookingId } = booking
 

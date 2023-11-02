@@ -62,7 +62,7 @@ function CheckinBooking() {
           checked={confirmPaid}
           onChange={() => setConfirmPaid((confirm) => !confirm)}
           id='confirm'
-          disabled={confirmPaid || isCheckingIn}
+          disabled={confirmPaid}
         >
           I confirm that {guests.fullName} has paid the total amount of{' '}
           {formatCurrency(totalPrice)}
@@ -71,7 +71,7 @@ function CheckinBooking() {
       <ButtonGroup>
         <Button
           onClick={handleCheckin}
-          disabled={!confirmPaid || isCheckingIn}
+          disabled={!confirmPaid}
         >
           Check in booking #{bookingId}
         </Button>

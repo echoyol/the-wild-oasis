@@ -52,16 +52,16 @@ function BookingDetail() {
 
       <BookingDataBox booking={booking} />
 
-      <ButtonGroup>
-        {status === 'unconfirmed' && (
-          <Button
-            icon={<HiArrowDownOnSquare />}
-            onClick={() => navigate(`/checkin/${bookingId}`)}
-          >
-            Check in
-          </Button>
-        )}
+      {status === 'unconfirmed' && (
+        <Button
+          icon={<HiArrowDownOnSquare />}
+          onClick={() => navigate(`/checkin/${bookingId}`)}
+        >
+          Check in
+        </Button>
+      )}
 
+      <ButtonGroup>
         <Button
           variation='secondary'
           onClick={moveBack}

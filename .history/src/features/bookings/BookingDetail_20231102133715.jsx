@@ -24,7 +24,6 @@ function BookingDetail() {
   const { booking, isLoading } = useBooking()
   const moveBack = useMoveBack()
   const navigate = useNavigate()
-
   if (isLoading) return <Spinner />
 
   // if (!booking) {
@@ -52,16 +51,16 @@ function BookingDetail() {
 
       <BookingDataBox booking={booking} />
 
-      <ButtonGroup>
-        {status === 'unconfirmed' && (
-          <Button
-            icon={<HiArrowDownOnSquare />}
-            onClick={() => navigate(`/checkin/${bookingId}`)}
-          >
-            Check in
-          </Button>
-        )}
+      {status === 'unconfirmed' && (
+        <Button
+          icon={<HiArrowDownOnSquare />}
+          onClick={() => navigate(`/checkin/${bookingId}`)}
+        >
+          Check in
+        </Button>
+      )}
 
+      <ButtonGroup>
         <Button
           variation='secondary'
           onClick={moveBack}

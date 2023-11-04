@@ -10,11 +10,13 @@ import useSingup from './useSingup'
 function SignupForm() {
   const { signup, isLoading } = useSingup()
 
-  const { register, formState, getValues, handleSubmit, reset } = useForm()
+  const { register, formState, getValues, handleSubmit, reset } = useForm({
+    mode: 'onChange',
+  })
   const { errors } = formState
 
   function onSubmit({ fullName, email, password }) {
-    signup({ fullName, email, password }, { onSettled: () => reset() })
+    signup({ fullName, email, password }, { onSettled: reset })
   }
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
@@ -25,7 +27,6 @@ function SignupForm() {
         <Input
           type='text'
           id='fullName'
-          disabled={isLoading}
           {...register('fullName', { required: 'This field is required' })}
         />
       </FormRow>
@@ -37,7 +38,6 @@ function SignupForm() {
         <Input
           type='email'
           id='email'
-          disabled={isLoading}
           {...register('email', {
             required: 'This field is required',
             pattern: {
@@ -55,7 +55,6 @@ function SignupForm() {
         <Input
           type='password'
           id='password'
-          disabled={isLoading}
           {...register('password', {
             required: 'This field is required',
             minLength: {
@@ -73,7 +72,6 @@ function SignupForm() {
         <Input
           type='password'
           id='passwordConfirm'
-          disabled={isLoading}
           {...register('passwordConfirm', {
             required: 'This field is required',
             validate: (value) =>
@@ -90,7 +88,7 @@ function SignupForm() {
         >
           Cancel
         </Button>
-        <Button disabled={isLoading}>Create new user</Button>
+        <Button>Create new user</Button>
       </FormRow>
     </Form>
   )

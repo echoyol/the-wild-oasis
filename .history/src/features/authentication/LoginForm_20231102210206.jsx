@@ -3,7 +3,7 @@ import Button from '../../ui/Button'
 import Form from '../../ui/Form'
 import Input from '../../ui/Input'
 import FormRowVertical from '../../ui/FormRowVertical'
-import SpinnerMini from '../../ui/SpinnerMini'
+import { login } from '../../services/apiAuth'
 import useLogin from './useLogin'
 
 function LoginForm() {
@@ -48,7 +48,7 @@ function LoginForm() {
           size='large'
           disabled={isLoading}
         >
-          {!isLoading ? 'Log in' : <SpinnerMini />}
+          Login
         </Button>
       </FormRowVertical>
     </Form>

@@ -4,7 +4,7 @@ const GlobalStyles = createGlobalStyle`
 :root {
   
 
- &, &.light-mode{
+  &.light-mode{
   /* Grey */
   --color-grey-0: #fff;
   --color-grey-50: #f9fafb;
@@ -90,7 +90,7 @@ const GlobalStyles = createGlobalStyle`
   --color-brand-700: #4338ca;
   --color-brand-800: #3730a3;
   --color-brand-900: #312e81;
-
+  
   --border-radius-tiny: 3px;
   --border-radius-sm: 5px;
   --border-radius-md: 7px;

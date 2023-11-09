@@ -1,4 +1,5 @@
 import { useState } from 'react'
+
 import Button from '../../ui/Button'
 import FileInput from '../../ui/FileInput'
 import Form from '../../ui/Form'
@@ -6,6 +7,7 @@ import FormRow from '../../ui/FormRow'
 import Input from '../../ui/Input'
 import useUser from './useUser'
 import { useUpdateUser } from './useUpdateUser'
+import { ReactQueryDevtoolsPanel } from '@tanstack/react-query-devtools'
 
 function UpdateUserDataForm() {
   // We don't need the loading state, and can immediately use the user data, because we know that it has already been loaded at this point
@@ -24,22 +26,10 @@ function UpdateUserDataForm() {
   function handleSubmit(e) {
     e.preventDefault()
     if (!fullName) return
-    updateUser(
-      { fullName, avatar },
-      {
-        onSuccess: () => {
-          setAvatar(null)
-          setFullName('')
-          e.target.reset()
-        },
-      }
-    )
+    console.log(avatar)
+    updateUser({ fullName, avatar })
   }
 
-  function handleCancel() {
-    setFullName(currentFullName)
-    setAvatar(null)
-  }
   return (
     <Form onSubmit={handleSubmit}>
       <FormRow label='Email address'>
@@ -70,7 +60,6 @@ function UpdateUserDataForm() {
           type='reset'
           variation='secondary'
           disabled={isUpdating}
-          onClick={handleCancel}
         >
           Cancel
         </Button>

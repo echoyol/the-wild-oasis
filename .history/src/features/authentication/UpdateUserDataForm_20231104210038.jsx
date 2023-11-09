@@ -1,4 +1,5 @@
 import { useState } from 'react'
+
 import Button from '../../ui/Button'
 import FileInput from '../../ui/FileInput'
 import Form from '../../ui/Form'
@@ -23,23 +24,9 @@ function UpdateUserDataForm() {
 
   function handleSubmit(e) {
     e.preventDefault()
-    if (!fullName) return
-    updateUser(
-      { fullName, avatar },
-      {
-        onSuccess: () => {
-          setAvatar(null)
-          setFullName('')
-          e.target.reset()
-        },
-      }
-    )
+    if (!fullName) updateUser({ fullName, avatar })
   }
 
-  function handleCancel() {
-    setFullName(currentFullName)
-    setAvatar(null)
-  }
   return (
     <Form onSubmit={handleSubmit}>
       <FormRow label='Email address'>
@@ -70,7 +57,6 @@ function UpdateUserDataForm() {
           type='reset'
           variation='secondary'
           disabled={isUpdating}
-          onClick={handleCancel}
         >
           Cancel
         </Button>

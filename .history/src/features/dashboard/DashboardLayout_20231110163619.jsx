@@ -22,15 +22,13 @@ function DashboardLayout() {
   } = useRecentStays()
   const { cabins, isLoading: isLoading3 } = useCabins()
 
-  if (isLoading1 || isLoading2 || isLoading3) return <Spinner />
+  if (isLoading1 || isLoading2) return <Spinner />
 
   return (
     <StyledDashboardLayout>
       <Stats
         bookings={bookings}
         confirmedStays={confirmedStays}
-        numDays={numDays}
-        cabinCount={cabins.length}
       />
       <div>11</div>
       <div>111</div>

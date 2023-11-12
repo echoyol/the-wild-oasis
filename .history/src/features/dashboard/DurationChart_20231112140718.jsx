@@ -1,14 +1,6 @@
 import styled from 'styled-components'
 import Heading from '../../ui/Heading'
-import {
-  Cell,
-  Legend,
-  Pie,
-  PieChart,
-  ResponsiveContainer,
-  Tooltip,
-} from 'recharts'
-import { useDarkMode } from '../../context/DarkModeContext'
+import { Cell, Legend, Pie, PieChart, ResponsiveContainer } from 'recharts'
 
 const ChartBox = styled.div`
   /* Box */
@@ -142,20 +134,13 @@ function prepareData(startData, stays) {
 }
 
 function DurationChart({ confirmedStays }) {
-  const { isDarkMode } = useDarkMode()
-  const startDate = isDarkMode ? startDataDark : startDataLight
-  const data = prepareData(startDate, confirmedStays)
-
   return (
     <ChartBox>
       <Heading as='h2'>Stay duration summary</Heading>
-      <ResponsiveContainer
-        width='100%'
-        height={240}
-      >
+      <ResponsiveContainer>
         <PieChart>
           <Pie
-            data={data}
+            data={startDataLight}
             nameKey='duration'
             dataKey='value'
             innerRadius={85}
@@ -164,7 +149,7 @@ function DurationChart({ confirmedStays }) {
             cy='50%'
             paddingAngle={3}
           >
-            {data.map((entry) => (
+            {startDataLight.map((entry) => (
               <Cell
                 fill={entry.color}
                 stroke={entry.color}
@@ -172,13 +157,9 @@ function DurationChart({ confirmedStays }) {
               />
             ))}
           </Pie>
-          <Tooltip />
           <Legend
             verticalAlign='middle'
             align='right'
-            width='30%'
-            iconSize={15}
-            iconType='circle'
           />
         </PieChart>
       </ResponsiveContainer>

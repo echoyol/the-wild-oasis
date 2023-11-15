@@ -4,7 +4,7 @@ import Heading from '../../ui/Heading'
 import Row from '../../ui/Row'
 import useTodayActivity from './useTodayActivity'
 import Spinner from '../../ui/Spinner'
-import TodayActivityList from '../../ui/TodayActivityList'
+import TodayList from '../../ui/TodayList'
 
 const StyledToday = styled.div`
   /* Box */
@@ -21,7 +21,7 @@ const StyledToday = styled.div`
 `
 
 function TodayActivity() {
-  const { activities, isLoading } = useTodayActivity()
+  const { stays, isLoading } = useTodayActivity()
 
   return (
     <StyledToday>
@@ -29,7 +29,7 @@ function TodayActivity() {
         <Heading as='h2'>Today</Heading>
       </Row>
 
-      {!isLoading ? <TodayActivityList activities={activities} /> : <Spinner />}
+      {!isLoading ? <TodayList stays={stays} /> : <Spinner />}
     </StyledToday>
   )
 }

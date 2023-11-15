@@ -21,7 +21,7 @@ const StyledToday = styled.div`
 `
 
 function TodayActivity() {
-  const { activities, isLoading } = useTodayActivity()
+  const { stays, isLoading } = useTodayActivity()
 
   return (
     <StyledToday>
@@ -29,7 +29,7 @@ function TodayActivity() {
         <Heading as='h2'>Today</Heading>
       </Row>
 
-      {!isLoading ? <TodayActivityList activities={activities} /> : <Spinner />}
+      {!isLoading ? <TodayActivityList stays={stays} /> : <Spinner />}
     </StyledToday>
   )
 }

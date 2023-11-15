@@ -7,9 +7,9 @@ import { useSearchParams } from 'react-router-dom'
 import Empty from '../../ui/Empty'
 
 function CabinTable() {
+  if (isLoading) return <Spinner />
   const { isLoading, cabins } = useCabins()
   const [searchParams] = useSearchParams()
-  if (isLoading) return <Spinner />
 
   if (!cabins.length) return <Empty resourceName='cabins' />
 

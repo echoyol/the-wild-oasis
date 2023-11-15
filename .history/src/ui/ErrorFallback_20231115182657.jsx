@@ -33,7 +33,7 @@ const Box = styled.div`
   }
 `
 
-function ErrorFallback({ error, resetErrorBoundary }) {
+function ErrorFallback({ error }) {
   return (
     <>
       <GlobalStyles />
@@ -41,12 +41,7 @@ function ErrorFallback({ error, resetErrorBoundary }) {
         <Box>
           <Heading as='h1'>Something went wrong</Heading>
           <p>{error.message}</p>
-          <Button
-            size='large'
-            onClick={resetErrorBoundary}
-          >
-            Try again
-          </Button>
+          <Button size='large'>Try again</Button>
         </Box>
       </StyledErrorFallback>
     </>

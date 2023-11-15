@@ -32,8 +32,8 @@ function BookingDetail() {
   const moveBack = useMoveBack()
   const navigate = useNavigate()
 
-  if (isLoading) return <Spinner />
   const { status, id: bookingId } = booking
+  if (isLoading) return <Spinner />
 
   const statusToTagName = {
     unconfirmed: 'blue',

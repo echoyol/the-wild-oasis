@@ -47,7 +47,6 @@ function CabinTable() {
         </Table.Header>
 
         <Table.Body
-          // data={filteredCabins}
           data={sortedCabins}
           render={(cabin) => (
             <CabinRow
